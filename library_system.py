@@ -215,7 +215,6 @@ class LibrarySystem:
         self.librarians = {}  # Key: Librarian ID, Value: Librarian object
 
     # Book Operations
-
     def add_book(self, book: Book):
         self.books[book.isbn] = book
         return f"📚 Book '{book.title}' added successfully."
@@ -315,3 +314,147 @@ class LibrarySystem:
 
     def find_librarian(self, librarian_id):
         return self.librarians.get(librarian_id)
+
+    # Preload sample books for demonstration
+    def preload_sample_books(self):
+        if not self.books:
+            self.add_book(
+                Book(
+                    "The C Programming Language",
+                    1988,
+                    "Computer Science",
+                    "Kernighan & Ritchie",
+                    "9780131103627",
+                )
+            )
+            self.add_book(
+                Book(
+                    "Introduction to Algorithms",
+                    2009,
+                    "Computer Science",
+                    "Cormen et al.",
+                    "9780262033848",
+                )
+            )
+            self.add_book(
+                Book(
+                    "Mastering Ethereum",
+                    2018,
+                    "Blockchain",
+                    "Andreas M. Antonopoulos",
+                    "9781492049273",
+                )
+            )
+            self.add_book(
+                Book(
+                    "AI: A Modern Approach",
+                    2020,
+                    "Computer Science",
+                    "Russell & Norvig",
+                    "9780262038003",
+                )
+            )
+            self.add_book(
+                Book(
+                    "Messi vs Ronaldo",
+                    2021,
+                    "Football",
+                    "Jonathan Clegg & Joshua Robinson",
+                    "9781982134488",
+                )
+            )
+            self.add_book(
+                Book(
+                    "I Am Zlatan Ibrahimović",
+                    2016,
+                    "Football",
+                    "Zlatan Ibrahimović",
+                    "9781785039768",
+                )
+            )
+            self.add_book(
+                Book(
+                    "Believe Us: How Jürgen Klopp Transformed Liverpool",
+                    2021,
+                    "Football",
+                    "Melissa Reddy",
+                    "9781529347787",
+                )
+            )
+            self.add_book(
+                Book(
+                    "The Future Is Faster Than You Think",
+                    2020,
+                    "Tech & Innovation",
+                    "Peter H. Diamandis",
+                    "9781984822185",
+                )
+            )
+            self.add_book(
+                Book(
+                    "The Barcelona Legacy",
+                    2018,
+                    "Football",
+                    "Jonathan Wilson",
+                    "9781982134488",
+                )
+            )
+            self.add_book(
+                Book(
+                    "Effective Java",
+                    2018,
+                    "Computer Science",
+                    "Joshua Bloch",
+                    "9780134685991",
+                )
+            )
+            self.add_book(
+                Book(
+                    "Clean Code",
+                    2008,
+                    "Computer Science",
+                    "Robert C. Martin",
+                    "9780132350884",
+                )
+            )
+
+    # Preload sample magazines for demonstration
+    def preload_sample_magazines(self):
+        if not self.magazines:
+            self.add_magazine(
+                Magazine("National Geographic", 2022, "Science & Nature", "Various")
+            )
+            self.add_magazine(Magazine("Time", 2023, "Current Affairs", "Various"))
+            self.add_magazine(
+                Magazine("The Economist", 2023, "Economics", "The Economist Group")
+            )
+            self.add_magazine(
+                Magazine("Scientific American", 2021, "Science", "Various")
+            )
+            self.add_magazine(Magazine("Wired", 2022, "Technology", "Various"))
+            self.add_magazine(Magazine("Forbes", 2023, "Business", "Various"))
+            self.add_magazine(Magazine("Men's Health", 2023, "Lifestyle", "Various"))
+            self.add_magazine(
+                Magazine("New Scientist", 2022, "Science", "Reed Business")
+            )
+            self.add_magazine(
+                Magazine("The Atlantic", 2023, "Culture & Politics", "Various")
+            )
+            self.add_magazine(
+                Magazine("Popular Science", 2020, "Technology", "Various")
+            )
+
+    def preload_sample_videos(self):
+        if not self.videos:
+            self.add_video(Video("The Matrix", 1999, "Sci-Fi", "DVD", 136))
+            self.add_video(Video("Inception", 2010, "Sci-Fi", "Blu-Ray", 148))
+            self.add_video(Video("The Godfather", 1972, "Crime", "Digital", 175))
+            self.add_video(Video("Forrest Gump", 1994, "Drama", "DVD", 142))
+            self.add_video(Video("Interstellar", 2014, "Sci-Fi", "Blu-Ray", 169))
+            self.add_video(
+                Video("The Social Network", 2010, "Biography", "Digital", 120)
+            )
+            self.add_video(Video("Planet Earth II", 2016, "Documentary", "Blu-Ray", 60))
+            self.add_video(Video("The Dark Knight", 2008, "Action", "DVD", 152))
+            self.add_video(Video("Toy Story 3", 2010, "Animation", "DVD", 103))
+            self.add_video(Video("The Imitation Game", 2014, "History", "Digital", 113))

@@ -242,7 +242,6 @@ class LibrarySystem:
         return member.return_item(book)
 
     # Video Operations
-
     def add_video(self, video):
         self.videos[video.video_id] = video
         return f"🎞️ Video '{video.title}' added successfully."
@@ -270,7 +269,6 @@ class LibrarySystem:
         return member.return_item(video)
 
     # Magazine Operations
-
     def add_magazine(self, magazine):
         self.magazines[magazine.magazine_id] = magazine
         return f"📰 Magazine '{magazine.title}' added successfully."
@@ -298,19 +296,17 @@ class LibrarySystem:
         return member.return_item(magazine)
 
     # Member Management
-
     def register_member(self, member):
         self.members[member.member_id] = member
-        return f"👤 Member '{member.fname} {member.lname}' registered successfully."
+        return member
 
     def find_member(self, member_id):
         return self.members.get(member_id)
 
     # Librarian Management
-
     def register_librarian(self, librarian):
         self.librarians[librarian.librarian_id] = librarian
-        return f"🧑‍🏫 Librarian '{librarian.fname} {librarian.lname}' registered successfully."
+        return librarian
 
     def find_librarian(self, librarian_id):
         return self.librarians.get(librarian_id)
@@ -444,6 +440,7 @@ class LibrarySystem:
                 Magazine("Popular Science", 2020, "Technology", "Various")
             )
 
+    #  Preload video catalog for demo
     def preload_sample_videos(self):
         if not self.videos:
             self.add_video(Video("The Matrix", 1999, "Sci-Fi", "DVD", 136))
@@ -458,3 +455,7 @@ class LibrarySystem:
             self.add_video(Video("The Dark Knight", 2008, "Action", "DVD", 152))
             self.add_video(Video("Toy Story 3", 2010, "Animation", "DVD", 103))
             self.add_video(Video("The Imitation Game", 2014, "History", "Digital", 113))
+
+    # Make sure at least one member is registered for demo
+    def preload_sample_members(self):
+        self.register_member(Member("John", "Doe", "john@example.com"))

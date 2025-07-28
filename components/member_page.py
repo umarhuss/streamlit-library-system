@@ -12,6 +12,15 @@ def show():
         return
 
     member = st.session_state.logged_in_user
+    # if not isinstance(member, Member):
+    #     st.error("❌ Invalid user session. Please log in again.")
+    #     return
+    if not hasattr(member, "borrowed_items"):
+        st.error("❌ Invalid user session. Please log in again.")
+        st.write("DEBUG: logged_in_user =", member)
+        st.write("DEBUG: type =", type(member))
+        return
+
     st.title("📖 My Borrowed Items")
 
     if not member.borrowed_items:

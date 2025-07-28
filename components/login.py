@@ -16,8 +16,6 @@ def show():
         lname = lname.strip()
         email = email.strip()
 
-        st.write(f"DEBUG: fname='{fname}', lname='{lname}', email='{email}'")
-
         if not fname.strip() or not lname.strip() or not email.strip():
             st.error("❌ Please fill in all fields.")
             return
@@ -44,7 +42,7 @@ def show():
             st.session_state.logged_in_user = member
             st.session_state.user_role = "Member"
             st.session_state.redirect_target = "Member Portal"
-            st.rerun()
+            # st.rerun()
 
         else:  # Librarian
             librarian = next(
@@ -67,6 +65,3 @@ def show():
             st.session_state.user_role = "Librarian"
             st.session_state.redirect_target = "Librarian Portal"
             st.rerun()
-
-    st.write("DEBUG: Logged in user =", st.session_state.get("logged_in_user"))
-    st.write("DEBUG: Role =", st.session_state.get("user_role"))

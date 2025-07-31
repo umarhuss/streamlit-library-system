@@ -1,4 +1,5 @@
 import streamlit as st
+
 from library_system import Member
 
 
@@ -12,19 +13,30 @@ def show():
         return
 
     member = st.session_state.logged_in_user
-    # if not isinstance(member, Member):
-    #     st.error("❌ Invalid user session. Please log in again.")
-    #     return
     if not hasattr(member, "borrowed_items"):
         st.error("❌ Invalid user session. Please log in again.")
-        st.write("DEBUG: logged_in_user =", member)
-        st.write("DEBUG: type =", type(member))
         return
 
     st.title("📖 My Borrowed Items")
 
+    # Add refresh button
+    col1, col2 = st.columns([3, 1])
+    with col2:
+        if st.button("🔄 Refresh", key="refresh_member_portal"):
+            st.rerun()
+
     if not member.borrowed_items:
         st.info("You have not borrowed any items.")
     else:
+        st.write(f"You have borrowed **{len(member.borrowed_items)}** item(s):")
         for item in member.borrowed_items:
-            st.markdown(f"📘 **{item.title}** – {item.__class__.__name__}")
+            with st.expander(
+                f"📘 {item.title} ({item.__class__.__name__})", expanded=True
+            ):
+                st.write(item.get_description())
+                if st.button(
+                    f"Return '{item.title}'", key=f"return_{item.title}_{id(item)}"
+                ):
+                    result = member.return_item(item)
+                    st.success(result)
+                    st.rerun()

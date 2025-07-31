@@ -1,5 +1,6 @@
 import streamlit as st
-from library_system import Member, Librarian
+
+from library_system import Librarian, Member
 
 
 def show():
@@ -42,7 +43,6 @@ def show():
             st.session_state.logged_in_user = member
             st.session_state.user_role = "Member"
             st.session_state.redirect_target = "Member Portal"
-            # st.rerun()
 
         else:  # Librarian
             librarian = next(

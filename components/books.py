@@ -7,13 +7,17 @@ def show():
 
     st.subheader("Browse Books")
 
-    # Select a member to simulate borrowing
-    if not system.members:
-        st.warning("No members registered. Please register a member first.")
+    # Check if user is logged in
+    if "logged_in_user" not in st.session_state:
+        st.warning("Please log in to borrow books.")
         return
-    member_id = st.selectbox(
-        "Select a member", list(system.members.keys()), key="member_select"
-    )
+
+    if st.session_state.user_role != "Member":
+        st.warning("Only members can borrow books.")
+        return
+
+    member = st.session_state.logged_in_user
+    member_id = member.member_id
 
     # Check if there are any books in the library yet
     if not system.books:
@@ -41,5 +45,8 @@ def show():
                         if st.button("Borrow", key=f"borrow_{book.isbn}"):
                             result = system.checkout_book(book.isbn, member_id)
                             st.success(result)
+                            st.info(
+                                "💡 Check your Member Portal to see your borrowed items!"
+                            )
                     else:
                         st.write("❌ Not Available")

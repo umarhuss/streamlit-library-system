@@ -5,14 +5,17 @@ def show():
     system = st.session_state.library_system
     st.subheader("Videos")
 
-    # Check for registered members
-    if not system.members:
-        st.warning("Please register a member first to borrow videos.")
+    # Check if user is logged in
+    if "logged_in_user" not in st.session_state:
+        st.warning("Please log in to borrow videos.")
         return
 
-    member_id = st.selectbox(
-        "Select a member", list(system.members.keys()), key="video_member"
-    )
+    if st.session_state.user_role != "Member":
+        st.warning("Only members can borrow videos.")
+        return
+
+    member = st.session_state.logged_in_user
+    member_id = member.member_id
 
     # Check if there are any videos
     if not system.videos:
@@ -24,7 +27,7 @@ def show():
     for i, video in enumerate(system.videos.values()):
         with cols[i % 4]:
             st.image(
-                "https://img.icons8.com/?size=100&id=44827&format=png&color=000000",  # replace with a better thumbnail if desired
+                "https://img.icons8.com/?size=100&id=44827&format=png&color=000000",
                 width=80,
             )
             st.markdown(f"### {video.title}")
@@ -36,3 +39,4 @@ def show():
                 if st.button("Borrow", key=f"borrow_video_{video.video_id}"):
                     result = system.checkout_video(video.video_id, member_id)
                     st.success(result)
+                    st.info("💡 Check your Member Portal to see your borrowed items!")

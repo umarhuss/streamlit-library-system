@@ -1,9 +1,6 @@
 import streamlit as st
 
 
-import streamlit as st
-
-
 def show():
     user = st.session_state.get("logged_in_user", None)
     role = st.session_state.get("user_role", None)

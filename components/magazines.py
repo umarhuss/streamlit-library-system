@@ -6,13 +6,17 @@ def show():
 
     st.subheader("Magazines")
 
-    # Check for registered members
-    if not system.members:
-        st.warning("Please register a member first to borrow magazines.")
+    # Check if user is logged in
+    if "logged_in_user" not in st.session_state:
+        st.warning("Please log in to borrow magazines.")
         return
-    member_id = st.selectbox(
-        "Select a member", list(system.members.keys()), key="magazine_member"
-    )
+
+    if st.session_state.user_role != "Member":
+        st.warning("Only members can borrow magazines.")
+        return
+
+    member = st.session_state.logged_in_user
+    member_id = member.member_id
 
     # Check for magazines
     if not system.magazines:
@@ -34,3 +38,4 @@ def show():
                 if st.button("Borrow", key=f"borrow_mag_{mag.magazine_id}"):
                     result = system.checkout_magazine(mag.magazine_id, member_id)
                     st.success(result)
+                    st.info("💡 Check your Member Portal to see your borrowed items!")
